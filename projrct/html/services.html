@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title></title>
+    <link rel="stylesheet" href="/css/main.js">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      p {
+        font-size: 14px;
+      }
+      .contact .contact-about h3 {
+        font-size: 36px;
+        margin: 0 0 10px 0;
+        padding: 0;
+        line-height: 1;
+        font-weight: 300;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #d43076;
+      }
+      .c{
+        background-color: #5a656e;
+      }
+      .contact .contact-about p {
+        font-size: 14px;
+        line-height: 24px;
+        font-family: "Playfair Display", serif;
+        color: #3c6387;
+      }
+      
+      .contact .social-links {
+        padding-bottom: 20px;
+      }
+      
+      .contact .social-links a {
+        font-size: 18px;
+        display: inline-block;
+        background: #fff;
+        color: #d43076;
+        line-height: 0;
+        padding: 8px 0;
+        margin-right: 4px;
+        border-radius: 50%;
+        text-align: center;
+        width: 36px;
+        height: 36px;
+        transition: 0.3s;
+        border: 1px solid #d43076;
+      }
+      
+      .contact .social-links a:hover {
+        background: #d43076;
+        color: #fff;
+      }
+      
+      .contact .info {
+        color: #5a656e;
+      }
+      
+      .contact .info i {
+        font-size: 32px;
+        color: #d43076;
+        line-height: 0;
+        margin-right: 15px;
+      }
+      
+      .contact .info p {
+        font-size: 14px;
+        margin: 0;
+      }
+      
+      .contact .php-email-form .error-message {
+        display: none;
+        color: #fff;
+        background: #ed3c0d;
+        text-align: left;
+        padding: 15px;
+        font-weight: 600;
+      }
+      
+      .contact .php-email-form .error-message br+br {
+        margin-top: 25px;
+      }
+      
+      .contact .php-email-form .sent-message {
+        display: none;
+        color: #fff;
+        background: #18d26e;
+        text-align: center;
+        padding: 15px;
+        font-weight: 600;
+      }
+
+      
+      .contact .php-email-form .loading {
+        display: none;
+        background: #fff;
+        text-align: center;
+        padding: 15px;
+      }
+      
+      .contact .php-email-form .loading:before {
+        content: "";
+        display: inline-block;
+        border-radius: 50%;
+        width: 24px;
+        height: 24px;
+        margin: 0 10px -6px 0;
+        border: 3px solid #18d26e;
+        border-top-color: #eee;
+        animation: animate-loading 1s linear infinite;
+      }
+      
+      .contact .php-email-form input,
+      .contact .php-email-form textarea {
+        border-radius: 0;
+        box-shadow: none;
+        font-size: 14px;
+      }
+      
+      .contact .php-email-form input:focus,
+      .contact .php-email-form textarea:focus {
+        border-color: #d43076;
+      }
+      
+      .contact .php-email-form button[type=submit] {
+        background: #d43076;
+        border: 0;
+        padding: 10px 24px;
+        color: #fff;
+        transition: 0.4s;
+        border-radius: 50px;
+      }
+      
+      .contact .php-email-form button[type=submit]:hover {
+        background: #dd5a92;
+      }
+      
+      
+      
+
+      /*--------------------------------------------------------------
+# Portfolio
+--------------------------------------------------------------*/
+      .portfolio .portfolio-item {
+        margin-bottom: 30px;
+      }
+
+      .portfolio #portfolio-flters {
+        padding: 0;
+        margin: 0 auto 35px auto;
+        list-style: none;
+        text-align: center;
+        background: #fff;
+        border-radius: 50px;
+        padding: 2px 15px;
+        box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.08);
+      }
+
+      .portfolio #portfolio-flters li {
+        cursor: pointer;
+        display: inline-block;
+        padding: 10px 15px 8px 15px;
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1;
+        text-transform: uppercase;
+        color: #5a656e;
+        margin-bottom: 5px;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .portfolio #portfolio-flters li:hover,
+      .portfolio #portfolio-flters li.filter-active {
+        color: #d43076;
+      }
+
+      .portfolio #portfolio-flters li:last-child {
+        margin-right: 0;
+      }
+
+      .portfolio .portfolio-wrap {
+        transition: 0.3s;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .portfolio .portfolio-wrap::before {
+        content: "";
+        background: rgba(44, 73, 100, 0.6);
+        position: absolute;
+        left: 30px;
+        right: 30px;
+        top: 30px;
+        bottom: 30px;
+        transition: all ease-in-out 0.3s;
+        z-index: 2;
+        opacity: 0;
+      }
+
+      .portfolio .portfolio-wrap .portfolio-info {
+        opacity: 0;
+        position: absolute;
+        top: 10%;
+        left: 0;
+        right: 0;
+        text-align: center;
+        z-index: 3;
+        transition: all ease-in-out 0.3s;
+      }
+
+      .portfolio .portfolio-wrap .portfolio-info h4 {
+        font-size: 20px;
+        color: #fff;
+        font-weight: 600;
+      }
+
+      .portfolio .portfolio-wrap .portfolio-info p {
+        color: #ffffff;
+        font-size: 14px;
+        text-transform: uppercase;
+      }
+
+      .portfolio .portfolio-wrap .portfolio-links {
+        opacity: 0;
+        left: 0;
+        right: 0;
+        bottom: 10%;
+        text-align: center;
+        z-index: 3;
+        position: absolute;
+        transition: all ease-in-out 0.3s;
+      }
+
+      .portfolio .portfolio-wrap .portfolio-links a {
+        color: #fff;
+        margin: 0 2px;
+        font-size: 28px;
+        display: inline-block;
+        transition: 0.3s;
+      }
+
+      .portfolio .portfolio-wrap .portfolio-links a:hover {
+        color: #e684ae;
+      }
+
+      .portfolio .portfolio-wrap:hover::before {
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 1;
+      }
+
+      .portfolio .portfolio-wrap:hover .portfolio-info {
+        opacity: 1;
+        top: calc(50% - 48px);
+      }
+
+      .portfolio .portfolio-wrap:hover .portfolio-links {
+        opacity: 1;
+        bottom: calc(50% - 50px);
+      }
+
+      /*--------------------------------------------------------------
+# Portfolio Details
+--------------------------------------------------------------*/
+      .portfolio-details {
+        padding-top: 40px;
+      }
+
+      .portfolio-details .portfolio-details-slider img {
+        width: 100%;
+      }
+
+      .portfolio-details .portfolio-details-slider .swiper-pagination {
+        margin-top: 20px;
+        position: relative;
+      }
+
+      .portfolio-details
+        .portfolio-details-slider
+        .swiper-pagination
+        .swiper-pagination-bullet {
+        width: 12px;
+        height: 12px;
+        background-color: #fff;
+        opacity: 1;
+        border: 1px solid #d43076;
+      }
+
+      .portfolio-details
+        .portfolio-details-slider
+        .swiper-pagination
+        .swiper-pagination-bullet-active {
+        background-color: #d43076;
+      }
+
+      .portfolio-details .portfolio-info {
+        padding: 30px;
+        box-shadow: 0px 0 30px rgba(44, 73, 100, 0.08);
+      }
+
+      .portfolio-details .portfolio-info h3 {
+        font-size: 22px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #eee;
+      }
+
+      .portfolio-details .portfolio-info ul {
+        list-style: none;
+        padding: 0;
+        font-size: 15px;
+      }
+
+      .portfolio-details .portfolio-info ul li + li {
+        margin-top: 10px;
+      }
+
+      .portfolio-details .portfolio-description {
+        padding-top: 30px;
+      }
+
+      .portfolio-details .portfolio-description h2 {
+        font-size: 26px;
+        font-weight: 700;
+        margin-bottom: 20px;
+      }
+
+      .portfolio-details .portfolio-description p {
+        padding: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container-fluid">uu 
+      <div class="row">  <h2>Portfolio</h2>
+        <p>
+          Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex
+          aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos
+          quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia
+          fugiat sit in iste officiis commodi quidem hic quas.
+        </p> </div>
+    </div>
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio section-bg">
+      <div class="container">
+        <div class="section-title">
+          <h2>Portfolio</h2>
+          <p>
+            Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex
+            aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos
+            quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia
+            fugiat sit in iste officiis commodi quidem hic quas.
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="portfolio-flters">
+              <li data-filter="*" class="filter-active">All</li>
+              <li data-filter=".filter-app">App</li>
+              <li data-filter=" *">Card</li>
+              <li data-filter="*">Web</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row portfolio-container">
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <div class="portfolio-wrap">
+              <img
+                src="https://2.bp.blogspot.com/_opS9Z5vqQYQ/TTYrMHXNiRI/AAAAAAAAAVA/H0gJ2oCoBTg/s1600/html5_bg_no_icons.png"
+                class="img-fluid"
+                alt=""
+              />
+              <div class="portfolio-info">
+                <h4>App 1</h4>
+                <p>App</p>
+              </div>
+              <div class="portfolio-links">
+                <a
+                  href="https://2.bp.blogspot.com/_opS9Z5vqQYQ/TTYrMHXNiRI/AAAAAAAAAVA/H0gJ2oCoBTg/s1600/html5_bg_no_icons.png"
+                  data-gallery="portfolioGallery"
+                  class="portfolio-lightbox"
+                  title="App 1"
+                  ><i class="bx bx-plus"></i
+                ></a>
+                <a href="portfolio-details.html" title="More Details"
+                  ><i class="bx bx-link"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+            <div class="portfolio-wrap">
+              <img
+                src="https://2.bp.blogspot.com/_opS9Z5vqQYQ/TTYrMHXNiRI/AAAAAAAAAVA/H0gJ2oCoBTg/s1600/html5_bg_no_icons.png"
+                class="img-fluid"
+                alt=""
+              />
+              <div class="portfolio-info">
+                <h4>Web 3</h4>
+                <p>Web</p>
+              </div>
+              <div class="portfolio-links">
+                <a
+                  href="https://2.bp.blogspot.com/_opS9Z5vqQYQ/TTYrMHXNiRI/AAAAAAAAAVA/H0gJ2oCoBTg/s1600/html5_bg_no_icons.png"
+                  data-gallery="portfolioGallery"
+                  class="portfolio-lightbox"
+                  title="Web 3"
+                  ><i class="bx bx-plus"></i
+                ></a>
+                <a href="portfolio-details.html" title="More Details"
+                  ><i class="bx bx-link"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <div class="portfolio-wrap">
+              <img
+                src="https://2.bp.blogspot.com/_opS9Z5vqQYQ/TTYrMHXNiRI/AAAAAAAAAVA/H0gJ2oCoBTg/s1600/html5_bg_no_icons.png"
+                class="img-fluid"
+                alt=""
+              />
+              <div class="portfolio-info">
+                <h4>App 2</h4>
+                <p>App</p>
+              </div>
+              <div class="portfolio-links">
+                <a
+                  href="https://2.bp.blogspot.com/_opS9Z5vqQYQ/TTYrMHXNiRI/AAAAAAAAAVA/H0gJ2oCoBTg/s1600/html5_bg_no_icons.png"
+                  data-gallery="portfolioGallery"
+                  class="portfolio-lightbox"
+                  title="App 2"
+                  ><i class="bx bx-plus"></i
+                ></a>
+                <a href="portfolio-details.html" title="More Details"
+                  ><i class="bx bx-link"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+            <div class="portfolio-wrap">
+              <img
+                src="https://cdn.mos.cms.futurecdn.net/Vp9WvV7YKdH4k8sKRePcE8.jpg"
+                class="img-fluid"
+                alt=""
+              />
+              <div class="portfolio-info">
+                <h4>Card 2</h4>
+                <p>Card</p>
+              </div>
+              <div class="portfolio-links">
+                <a
+                  href="https://cdn.mos.cms.futurecdn.net/Vp9WvV7YKdH4k8sKRePcE8.jpg"
+                  data-gallery="portfolioGallery"
+                  class="portfolio-lightbox"
+                  title="Card 2"
+                  ><i class="bx bx-plus"></i
+                ></a>
+                <a href="portfolio-details.html" title="More Details"
+                  ><i class="bx bx-link"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+            <div class="portfolio-wrap">
+              <img
+                src="https://cdn.mos.cms.futurecdn.net/Vp9WvV7YKdH4k8sKRePcE8.jpg"
+                class="img-fluid"
+                alt=""
+              />
+              <div class="portfolio-info">
+                <h4>Web 2</h4>
+                <p>Web</p>
+              </div>
+              <div class="portfolio-links">
+                <a
+                  href="https://cdn.mos.cms.futurecdn.net/Vp9WvV7YKdH4k8sKRePcE8.jpg"
+                  data-gallery="portfolioGallery"
+                  class="portfolio-lightbox"
+                  title="Web 2"
+                  ><i class="bx bx-plus"></i
+                ></a>
+                <a href="portfolio-details.html" title="More Details"
+                  ><i class="bx bx-link"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <div class="portfolio-wrap">
+              <img
+                src="https://cdn.mos.cms.futurecdn.net/Vp9WvV7YKdH4k8sKRePcE8.jpg"
+                class="img-fluid"
+                alt=""
+              />
+              <div class="portfolio-info">
+                <h4>App 3</h4>
+                <p>App</p>
+              </div>
+              <div class="portfolio-links">
+                <a
+                  href="https://cdn.mos.cms.futurecdn.net/Vp9WvV7YKdH4k8sKRePcE8.jpg"
+                  data-gallery="portfolioGallery"
+                  class="portfolio-lightbox"
+                  title="App 3"
+                  ><i class="bx bx-plus"></i
+                ></a>
+                <a href="portfolio-details.html" title="More Details"
+                  ><i class="bx bx-link"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+            <div class="portfolio-wrap">
+              <img
+                src="https://wallpaperaccess.com/full/1555163.jpg"
+                class="img-fluid"
+                alt=""
+              />
+              <div class="portfolio-info">
+                <h4>Card 1</h4>
+                <p>Card</p>
+              </div>
+              <div class="portfolio-links">
+                <a
+                  href="https://wallpaperaccess.com/full/1555163.jpg"
+                  data-gallery="portfolioGallery"
+                  class="portfolio-lightbox"
+                  title="Card 1"
+                  ><i class="bx bx-plus"></i
+                ></a>
+                <a href="portfolio-details.html" title="More Details"
+                  ><i class="bx bx-link"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-card">
+            <div class="portfolio-wrap">
+              <img
+                src="https://wallpaperaccess.com/full/1555163.jpg"
+                class="img-fluid"
+                alt=""
+              />
+              <div class="portfolio-info">
+                <h4>Card 3</h4>
+                <p>Card</p>
+              </div>
+              <div class="portfolio-links">
+                <a
+                  href="https://wallpaperaccess.com/full/1555163.jpg"
+                  data-gallery="portfolioGallery"
+                  class="portfolio-lightbox"
+                  title="Card 3"
+                  ><i class="bx bx-plus"></i
+                ></a>
+                <a href="portfolio-details.html" title="More Details"
+                  ><i class="bx bx-link"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-web">
+            <div class="portfolio-wrap">
+              <img
+                src="https://wallpaperaccess.com/full/1555163.jpg"
+                class="img-fluid"
+                alt=""
+              />
+              <div class="portfolio-info">
+                <h4>Web 3</h4>
+                <p>Web</p>
+              </div>
+              <div class="portfolio-links">
+                <a
+                  href="https://wallpaperaccess.com/full/1555163.jpg"
+                  data-gallery="portfolioGallery"
+                  class="portfolio-lightbox"
+                  title="Web 3"
+                  ><i class="bx bx-plus"></i
+                ></a>
+                <a href="portfolio-details.html" title="More Details"
+                  ><i class="bx bx-link"></i
+                ></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Portfolio Section -->
+    <!--seevices section start ---->
+
+    <div class="container">
+      <div class="row">
+        <div class="container">
+          <br /><br /><br />
+          <h1
+            style="
+              text-align: center;
+              font-size: 50px;
+              text-transform: uppercase;
+            "
+          >
+            Veiw rooms near<span style="color: #2bae66"> your college </span>
+          </h1>
+          <br /><br />
+          <div class="row">
+            <div class="col-sm-6 col-md-4 col-lg-3">
+              <a href="empoly.html"
+                ><img
+                  style="border-radius: 10px"
+                  src="https://r2.community.samsung.com/t5/image/serverpage/image-id/1957763i3D3FCCE267F8EF5E?v=v2"
+                  height=" 250px"
+                  width=" 230px"
+                />
+              </a>
+              <p>Maharani Laxmi Bai Government College of Excellence,gwalior</p>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+              <a href="empoly.html"
+                ><img
+                  style="border-radius: 10px"
+                  src="https://i.ytimg.com/vi/LvlOiVyid5c/hq720.jpg?sqp=-oaymwE7CK4FEIIDSFryq4qpAy0IARUAAAAAGAElAADIQj0AgKJD8AEB-AHUBoAC4AOKAgwIABABGEsgXyhlMA8=&rs=AOn4CLCa2XNGoIcNI5w8k2NzjQAzUD8TEg"
+                  height=" 250px"
+                  width=" 230px"
+              /></a>
+              <p>Dr.Bhim Ambedker Polytechnic College,gwalior</p>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+              <a href="empoly.html"
+                ><img
+                  style="border-radius: 10px"
+                  src="https://images.collegedunia.com/public/image/af6fdefa4ac3e0e7dfaf698bc7ccd386.png?tr=w-847,h-613,c-force"
+                  height=" 250px"
+                  width=" 230px"
+              /></a>
+              <p>Jiwaji University,gwalior</p>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+              <a href="empoly.html"
+                ><img
+                  style="border-radius: 10px"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBMSzhmnCb69jvn89th4VnCJsccf6l9njUuq9E4K5GYnuV10Uubuv7xzWelilBPvWeLpU&usqp=CAU"
+                  height=" 250px"
+                  width=" 230px"
+              /></a>
+              <p>Gwalior Nursing College,gwalior</p>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-3">
+              <a href="empoly.html"
+                ><img
+                  style="border-radius: 10px"
+                  src="https://images.shiksha.com/mediadata/images/1491988114phpEr6Aed_g.jpg"
+                  height=" 250px"
+                  width=" 230px"
+              /></a>
+              <p>Gwalior Engineering College</p>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+              <a href="empoly.html"
+                ><img
+                  style="border-radius: 10px"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRC0N-mincGlC8iqjpCmHF_F5MXpbTTyjCsI7GrxjMb8fy3nEzvYjn6KUy_AVLyM6iS_Jg&usqp=CAU"
+                  height=" 250px"
+                  width=" 230px"
+              /></a>
+              <p>Gwalior Institute of Information Technology and Management</p>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+              <a href="empoly.html"
+                ><img
+                  style="border-radius: 10px"
+                  src="https://img.collegedekhocdn.com/media/img/news/Expected_Good_Rank_in_JEE_Main_for_IIITM_Gwalior_B.Tech_Admission.jpg"
+                  height=" 250px"
+                  width=" 230px"
+              /></a>
+              <p>
+                Atal Bihari Vajpayee Indian Institute of Information Technology
+                and Management college,gwalior
+              </p>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+              <a href="empoly.html"
+                ><img
+                  style="border-radius: 10px"
+                  src="https://img.collegedekhocdn.com/media/img/news/Expected_Good_Rank_in_JEE_Main_for_IIITM_Gwalior_B.Tech_Admission.jpg"
+                  height=" 250px"
+                  width=" 230px"
+              /></a>
+              <p>
+                Atal Bihari Vajpayee Indian Institute of Information Technology
+                and Management college,gwalior
+              </p>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+              <a href="empoly.html"
+                ><img
+                  style="border-radius: 10px"
+                  src="https://img.collegedekhocdn.com/media/img/news/Expected_Good_Rank_in_JEE_Main_for_IIITM_Gwalior_B.Tech_Admission.jpg"
+                  height=" 250px"
+                  width=" 230px"
+              /></a>
+              <p>
+                Atal Bihari Vajpayee Indian Institute of Information Technology
+                and Management college,gwalior
+              </p>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+              <a href="empoly.html"
+                ><img
+                  style="border-radius: 10px"
+                  src="https://img.collegedekhocdn.com/media/img/news/Expected_Good_Rank_in_JEE_Main_for_IIITM_Gwalior_B.Tech_Admission.jpg"
+                  height=" 250px"
+                  width=" 230px"
+              /></a>
+              <p>
+                Atal Bihari Vajpayee Indian Institute of Information Technology
+                and Management college,gwalior
+              </p>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+              <a href="empoly.html"
+                ><img
+                  style="border-radius: 10px"
+                  src="https://img.collegedekhocdn.com/media/img/news/Expected_Good_Rank_in_JEE_Main_for_IIITM_Gwalior_B.Tech_Admission.jpg"
+                  height=" 250px"
+                  width=" 230px"
+              /></a>
+              <p>
+                Atal Bihari Vajpayee Indian Institute of Information Technology
+                and Management college,gwalior
+              </p>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+              <a href="empoly.html"
+                ><img
+                  style="border-radius: 10px"
+                  src="https://img.collegedekhocdn.com/media/img/news/Expected_Good_Rank_in_JEE_Main_for_IIITM_Gwalior_B.Tech_Admission.jpg"
+                  height=" 250px"
+                  width=" 230px"
+              /></a>
+              <p>
+                Atal Bihari Vajpayee Indian Institute of Information Technology
+                and Management college,gwalior
+              </p>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+              <a href="empoly.html"
+                ><img
+                  style="border-radius: 10px"
+                  src="https://img.collegedekhocdn.com/media/img/news/Expected_Good_Rank_in_JEE_Main_for_IIITM_Gwalior_B.Tech_Admission.jpg"
+                  height=" 250px"
+                  width=" 230px"
+              /></a>
+              <p>
+                Atal Bihari Vajpayee Indian Institute of Information Technology
+                and Management college,gwalior
+              </p>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+              <a href="empoly.html"
+                ><img
+                  style="border-radius: 10px"
+                  src="https://images.collegedunia.com/public/college_data/images/campusimage/1653113180DSC_0207.JPG"
+                  height=" 250px"
+                  width=" 230px"
+              /></a>
+              <p>Shri Ram College of Engineering and Management,gwalior</p>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-3">
+              <a href="empoly.html"
+                ><img
+                  style="border-radius: 10px"
+                  src="https://krglegalstudies.files.wordpress.com/2021/12/img_20211230_085414.jpg?w=966"
+                  height=" 250px"
+                  width=" 230px"
+              /></a>
+              <p>Kamla Raja Girls Government Post Graduate College,gwalior</p>
+            </div>
+
+            <div class="col-sm-6 col-md-4 col-lg-3">
+              <a href="empoly.html"
+                ><img
+                  style="border-radius: 10px"
+                  src="https://www.static-contents.youth4work.com/university/Documents/Colleges/newsEvent/2927065f-aeff-4b0e-9e39-302b6d01ca52.jpg"
+                  height=" 250px"
+                  width=" 230px"
+              /></a>
+              <p>
+                Gwalior Institute of Computer Technology and Science,gwalior
+              </p>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+              <a href="empoly.html"
+                ><img
+                  style="border-radius: 10px"
+                  src="https://www.myentranceexam.in/wp-content/uploads/2020/07/LNIPE-Admission.jpg"
+                  height=" 250px"
+                  width=" 230px"
+              /></a>
+              <p>Lakshmibai National Institute of Physical Education,gwalior</p>
+            </div>
+            <div class="col-sm-6 col-md-4 col-lg-3">
+              <a href="empoly.html"
+                ><img
+                  style="border-radius: 10px"
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSHvJwQmw9qM1N4cNiHOYbEVhWeIEjej9QHoruAFUICAcwC93geoiMQ1uqx_e7JysmCJCs&usqp=CAU"
+                  height=" 250px"
+                  width=" 230px"
+              /></a>
+              <p>Government Women's Polytechnic College,gwalior</p>
+            </div>
+          </div>
+        </div>
+        <!-- row end  -->
+      </div>
+    </div>
+    <!--seevices section end ---->
+
+    <div class="c">
+      <section id="contact" class="contact section-bg">
+        <div class="container">
+          <div class="section-title">
+            <h1 style="align-items: flex-start">Contact</h1>
+            <p>
+              Magnam dolores commodi suscipit. Necessitatibus eius consequatur
+              ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam
+              quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea.
+              Quia fugiat sit in iste officiis commodi quidem hic quas.
+            </p>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-4 col-md-4">
+              <div class="contact-about">
+                <h3>WEB STACK</h3>
+                <p style="font-size: 25px; color: chocolate">
+                  Cras fermentum odio eu feugiat. Justo eget magna fermentum
+                  iaculis eu non diam phasellus. Scelerisque felis imperdiet
+                  proin fermentum leo. Amet volutpat consequat mauris nunc
+                  congue.
+                </p>
+                <div class="social-links">
+                  <a href="#" class="youtube"
+                    ><i class="fa-brands fa-youtube"></i
+                  ></a>
+                  <a href="#" class="facebook"
+                    ><i class="fa-brands fa-facebook"></i
+                  ></a>
+                  <a href="" class="instagram"
+                    ><i class="fa-brands fa-square-instagram"></i>
+                  </a>
+                  <a href="#" class="linkedin"
+                    ><i class="fa-brands fa-linkedin"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-4">
+              <div class="info">
+                <div class="d-flex align-items-center">
+                  <p>Gohad bhind, pin code 477116 ,rundhasarkar (chinkupura)</p>
+                </div>
+
+                <div class="d-flex align-items-center mt-4">
+                  <i class="bi bi-envelope"></i>
+                  <p>chourasiya@gmail.com</p>
+                </div>
+
+                <div class="d-flex align-items-center mt-4">
+                  <i class="bi bi-phone"></i>
+                  <p>+1 ( 123)-456-7899</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-5 col-md-8">
+              <form
+                action="forms/contact.php"
+                method="post"
+                role="form"
+                class="php-email-form"
+              >
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="name"
+                    class="form-control"
+                    id="name"
+                    placeholder="Your Name"
+                    required
+                  />
+                </div>
+                <div class="form-group mt-3">
+                  <input
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    id="email"
+                    placeholder="Your Email"
+                    required
+                  />
+                </div>
+                <div class="form-group mt-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="subject"
+                    id="subject"
+                    placeholder="Subject"
+                    required
+                  />
+                </div>
+                <div class="form-group mt-3">
+                  <textarea
+                    class="form-control"
+                    name="message"
+                    rows="5"
+                    placeholder="Message"
+                    required
+                  ></textarea>
+                </div>
+                <div class="my-3">
+                  <div class="loading">Loading</div>
+                  <div class="error-message"></div>
+                  <div class="sent-message">
+                    Your message has been sent. Thank you!
+                  </div>
+                </div>
+                <div class="text-center">
+                  <button type="submit">Send Message</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <!-- End Contact Section -->
+  </body>
+</html>
+ 
